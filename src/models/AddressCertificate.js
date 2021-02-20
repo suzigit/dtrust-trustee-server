@@ -28,6 +28,6 @@ const addressCertificateSchema = new mongoose.Schema({
         required: true
     }
 
-})
+});
 
 mongoose.model ('AddressCertificate', addressCertificateSchema);
