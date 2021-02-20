@@ -29,7 +29,7 @@ app.use(router);
 
 
 app.get('/', requireAuth, (req, res) => {
-    const j = {info: chegou aqui no nodejs}
+    const j = {"info": "chegou aqui no nodejs"};
     res.send(j);
 })
 
