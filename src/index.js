@@ -29,7 +29,8 @@ app.use(router);
 
 
 app.get('/', requireAuth, (req, res) => {
-    res.send('hi there');
+    const j = {info: chegou aqui no nodejs}
+    res.send(j);
 })
 
 app.listen(process.env.PORT || 3000, () => {
