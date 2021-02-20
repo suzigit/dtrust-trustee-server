@@ -17,6 +17,7 @@ mongoose.connection.on('error', (err) => {
 })
 
 require('./models/AddressCertificate');
+require('./models/TrusteeCertificate');
 
 
 const router = require('./routes/routes');
