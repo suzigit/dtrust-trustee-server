@@ -8,14 +8,14 @@ const mongoose = require('mongoose');
           trusteeName: myName,
           subjectId: subjectId,
           subjectName: subjectName,
-          addressData: addressData,
-          timestamp: new Date(),
-          signature: 
+          timestamp: new Date()
+            signature: 
+
         };  
 */
 
 
-const addressCertificateSchema = new mongoose.Schema({
+const trusteeCertificateSchema = new mongoose.Schema({
 
     trusteeId: {
       type: String,
@@ -33,10 +33,6 @@ const addressCertificateSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    addressData: {
-        type: String,
-        required: true
-    },
     timestamp: {
         type: String,
         required: true    
@@ -48,4 +44,4 @@ const addressCertificateSchema = new mongoose.Schema({
 
 });
 
-mongoose.model ('AddressCertificate', addressCertificateSchema);
+mongoose.model ('TrusteeCertificate', trusteeCertificateSchema);

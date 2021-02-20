@@ -19,7 +19,8 @@ mongoose.connection.on('error', (err) => {
 require('./models/AddressCertificate');
 
 
-const router = require('./routes/authRootTrustee');
+const router = require('./routes/routes');
+
 const requireAuth = require('./middlewares/requireAuth'); 
 
 const app = express();
@@ -35,5 +36,4 @@ app.get('/', requireAuth, (req, res) => {
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("listening on 30000");
-
 })
