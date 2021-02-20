@@ -8,9 +8,8 @@ const requireAuth = require('../middlewares/requireAuth');
 
 router.post('/test', requireAuth, async (req, res) => {
 
-    const { user, certificateBody } = req.body;
+    const { certificateBody } = req.body;
     console.log(req.body);
-    console.log(user);
     console.log(certificateBody);
     console.log(certificateBody["addressData"]);
 
@@ -23,11 +22,11 @@ router.post('/test', requireAuth, async (req, res) => {
         await ac.save();
         console.log("salvou");
 
-        res.send('You made a req');
+        res.send('You made a request');
     } catch (err) {
         console.log("erro ao salvar dados");
         console.log(err);
-        res.status(422).send("erro salvando o address certificate");
+        res.status(422).send("erro salvando o address certificate: " + err);
     }
 })
 

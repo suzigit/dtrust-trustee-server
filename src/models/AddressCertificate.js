@@ -19,7 +19,7 @@ const addressCertificateSchema = new mongoose.Schema({
 
     addressData: {
         type: String,
-        unique: true,
+        unique: false,
         required: true
     },
     signature: {
