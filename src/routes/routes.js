@@ -47,6 +47,7 @@ router.post('/saveTrusteeCertificate', requireAuth, async (req, res) => {
     }
 })
 
+// ******* ROOT TRUSTEE ****** //
 
 router.post('/askRootTrustee', requireAuth, async (req, res) => {
 
@@ -66,8 +67,7 @@ router.post('/askRootTrustee', requireAuth, async (req, res) => {
 });
 
 
-// ******* ROOT TRUSTEE ****** //
-
+//THIS ROUTE WILL BE CALLED BY THE MANAGERS ONLY
 router.post('/createCertificateRootTrustee', requireAuth, async (req, res) => {
 
     console.log("createCertificateRootTrustee");
@@ -103,14 +103,13 @@ router.get('/rootTrusteeCertificate', requireAuth, async (req, res) => {
 
     console.log("rootTrusteeCertificate");
 
-    const { infoRootTrustee } = req.body;
-    console.log(req.body);
+    console.log(req.query.subjectId);
+    console.log(req.query.subjectName);
 
     try {
-
         //get the most recent root trustee certificate
-        const obj = await RootTrusteeCertificate.find({ subjectId: infoRootTrustee.subjectId, 
-                            subjectName: infoRootTrustee.subjectName }).sort({'timestamp':-1}).limit(1).exec();
+        const obj = await RootTrusteeCertificate.find({ subjectId: req.query.subjectId, 
+                            subjectName: req.query.subjectName }).sort({'timestamp':-1}).limit(1).exec();
 
         res.status(200).send(obj);
     } catch (err) {
