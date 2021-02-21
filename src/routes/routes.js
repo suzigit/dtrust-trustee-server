@@ -115,7 +115,8 @@ router.get('/rootTrusteeCertificate', requireAuth, async (req, res) => {
         if (obj!=[]) {
             jsonResult=obj;
         }
-        res.status(200).send(jsonResult);
+        console.log(jsonResult);
+        res.status(200).json(jsonResult);
     } catch (err) {
         console.log(err);
         res.status(422).send("error rootTrusteeCertificate: " + err);
