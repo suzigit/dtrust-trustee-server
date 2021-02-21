@@ -103,16 +103,15 @@ router.get('/rootTrusteeCertificate', requireAuth, async (req, res) => {
 
     console.log("rootTrusteeCertificate");
 
-    console.log(req.query.subjectId);
-    console.log(req.query.subjectName);
-
     try {
         //get the most recent root trustee certificate
         const obj = await RootTrusteeCertificate.find({ subjectId: req.query.subjectId, 
                             subjectName: req.query.subjectName }).sort({'timestamp':-1}).limit(1).exec();
 
+        console.log(obj);
         let jsonResult={"notFound":"true"};
-        if (!obj) {
+        if (obj && obj.length!=0) {
+            console.log("entrei no if do !obj");
             jsonResult=obj;
         }
         console.log(jsonResult);
