@@ -111,7 +111,7 @@ router.get('/rootTrusteeCertificate', requireAuth, async (req, res) => {
         const obj = await RootTrusteeCertificate.find({ subjectId: req.query.subjectId, 
                             subjectName: req.query.subjectName }).sort({'timestamp':-1}).limit(1).exec();
 
-        const jsonResult={"notFound":"true"};
+        let jsonResult={"notFound":"true"};
         if (obj!=[]) {
             jsonResult=obj;
         }
