@@ -6,7 +6,7 @@ const RootTrusteeCertificateRequest = mongoose.model('RootTrusteeCertificateRequ
 const RootTrusteeCertificate = mongoose.model('RootTrusteeCertificate');
 const router = express.Router();
 const requireAuth = require('../middlewares/requireAuth'); 
-const signTrusteeCertificate = require('../GenerateRootCertificate');
+const signTrusteeCertificateAndPack = require('../GenerateRootCertificate');
 
 router.post('/saveAddressCertificate', requireAuth, async (req, res) => {
 
@@ -81,7 +81,7 @@ router.post('/createCertificateRootTrustee', requireAuth, async (req, res) => {
         console.log(rootTrusteeCertificateRequest);
 
         //generate a root certificate
-        const certificate = await signTrusteeCertificate(rootTrusteeCertificateRequest.subjectId, 
+        const certificate = await signTrusteeCertificateAndPack(rootTrusteeCertificateRequest.subjectId, 
             rootTrusteeCertificateRequest.subjectName);
         console.log("gerou certificado");
         console.log(certificate);
@@ -105,9 +105,9 @@ router.get('/rootTrusteeCertificate', requireAuth, async (req, res) => {
 
     try {
         //get the most recent root trustee certificate
-        const obj = await RootTrusteeCertificate.find({ subjectId: req.query.subjectId, 
-                            subjectName: req.query.subjectName }).sort({'timestamp':-1}).limit(1).exec();
-
+        let obj = await RootTrusteeCertificate.find({ "certificate.sub": req.query.subjectId,
+                    "certificate.subnm": req.query.subjectName
+            }).sort({'certificate.iat':-1}).limit(1).exec();
         let jsonResult={"notFound":"true"};
         if (obj && obj.length!=0) {
             jsonResult=obj[0];

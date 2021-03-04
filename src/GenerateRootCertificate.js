@@ -6,22 +6,26 @@ const getMyId = () => {
     return "did:ethr:" + userWallet.address;
 }
 
-const signTrusteeCertificate = async (subjectId, subjectName) => {
+const signTrusteeCertificateAndPack = async (subjectId, subjectName) => {
 
-    const certificateBody = 
+      const certificateBody = 
       {
-        trusteeId: getMyId(),
-        trusteeName: "TRUSTEE MASTER",
-        subjectId: subjectId,
-        subjectName: subjectName,
-        timestamp: new Date()
+        sub: subjectId,
+        subnm: subjectName,
+        iss: 1,
+        iat: Date.now()
       };
 
       const signedCertificate = await userWallet.signMessage(JSON.stringify(certificateBody));
 
-      certificateBody["signature"] = signedCertificate;
+      const rootTrusteData = {
+        certificate: certificateBody,
+        sig: signedCertificate,
+        tid: getMyId(),
+        pbkey: userWallet.publicKey
+      }
 
-      return certificateBody;
+      return rootTrusteData;
   };
 
-module.exports = signTrusteeCertificate;
+module.exports = signTrusteeCertificateAndPack;

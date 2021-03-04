@@ -2,31 +2,42 @@ const mongoose = require('mongoose');
 
 const rootTrusteeCertificateSchema = new mongoose.Schema({
 
-    trusteeId: {
+      tid: {
         type: String,
         required: true
       },
-      trusteeName: {
+      pbkey: {
         type: String,
         required: true
       },
-      subjectId: {
-        type: String,
-        required: true
-      },
-      subjectName: {
-        type: String,
-        required: true
-      },
-      timestamp: {
-          type: String,
-          required: true    
-      },
-      signature: {
+      sig: {
           type: String,
           required: true
+      },
+      certificate: {
+        type: {
+          sub: {
+            type: String,
+            required: true
+          },
+          subnm: {
+            type: String,
+            required: false
+          },
+          iss: {
+            type: Number,
+            required: true
+          },      
+          iat: {
+              type: String,
+              required: true    
+          }
+        },
+        required: true 
       }
-
 });
+
+
+
 
 mongoose.model ('RootTrusteeCertificate', rootTrusteeCertificateSchema);
