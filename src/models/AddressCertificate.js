@@ -1,50 +1,34 @@
 const mongoose = require('mongoose');
 
-/*
-
-      const certificateBody = 
-        {
-          trusteeId: getMyId(),
-          trusteeName: myName,
-          subjectId: subjectId,
-          subjectName: subjectName,
-          addressData: addressData,
-          timestamp: new Date(),
-          signature: 
-        };  
-*/
-
 
 const addressCertificateSchema = new mongoose.Schema({
 
-    trusteeId: {
-      type: String,
-      required: true
-    },
-    trusteeName: {
-      type: String,
-      required: true
-    },
-    subjectId: {
-      type: String,
-      required: true
-    },
-    subjectName: {
-      type: String,
-      required: true
-    },
-    addressData: {
+
+  sig: {
+    type: String,
+    required: true
+  },
+  data: {
+    type: {
+      subdid: {
         type: String,
         required: true
-    },
-    timestamp: {
+      },
+      subnm: {
         type: String,
-        required: true    
-    },
-    signature: {
-        type: String,
+        required: false
+      },
+      addr: {
+        type: Number,
         required: true
-    }
+      },      
+      iat: {
+          type: String,
+          required: true    
+      }
+    },
+    required: true 
+  }
 
 });
 
