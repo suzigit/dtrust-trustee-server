@@ -105,7 +105,7 @@ router.get('/rootTrusteeCertificate', requireAuth, async (req, res) => {
 
     try {
         //get the most recent root trustee certificate
-        let obj = await RootTrusteeCertificate.find({ "certificate.sub": req.query.subjectId,
+        let obj = await RootTrusteeCertificate.find({ "certificate.subkey": req.query.subjectId,
                     "certificate.subnm": req.query.subjectName
             }).sort({'certificate.iat':-1}).limit(1).exec();
         let jsonResult={"notFound":"true"};
