@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 
 const rootTrusteeCertificateSchema = new mongoose.Schema({
 
-      tid: {
-        type: String,
-        required: true
-      },
       pbkey: {
         type: String,
         required: true
@@ -16,7 +12,7 @@ const rootTrusteeCertificateSchema = new mongoose.Schema({
       },
       certificate: {
         type: {
-          sub: {
+          subkey: {
             type: String,
             required: true
           },

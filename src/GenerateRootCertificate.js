@@ -10,7 +10,7 @@ const signTrusteeCertificateAndPack = async (subjectId, subjectName) => {
 
       const certificateBody = 
       {
-        sub: subjectId,
+        subkey: subjectId,
         subnm: subjectName,
         iss: 1,
         iat: Date.now()
