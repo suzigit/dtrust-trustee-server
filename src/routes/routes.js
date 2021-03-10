@@ -13,7 +13,9 @@ router.post('/saveAddressCertificate', requireAuth, async (req, res) => {
     console.log("saveAddressCertificate");
 
     const { certificateBody } = req.body;
+    certificateBody.iat_server = Date.now();
     console.log(req.body);
+
 
     try {
         const obj = new AddressCertificate(certificateBody);
@@ -33,6 +35,7 @@ router.post('/saveTrusteeCertificate', requireAuth, async (req, res) => {
     console.log("saveTrusteeCertificate");
 
     const { certificateBody } = req.body;
+    certificateBody.iat_server = Date.now();
     console.log(req.body);
 
     try {
@@ -55,6 +58,8 @@ router.post('/askRootTrustee', requireAuth, async (req, res) => {
 
     const { infoRootTrustee } = req.body;
     console.log(req.body);
+
+    infoRootTrustee.iat_server = Date.now();
 
     try {
         const obj = new RootTrusteeCertificateRequest(infoRootTrustee);
@@ -87,6 +92,8 @@ router.post('/createCertificateRootTrustee', requireAuth, async (req, res) => {
         console.log(certificate);
 
         //save the new certificate
+        certificate.iat_server = Date.now();
+
         const obj = new RootTrusteeCertificate(certificate);
         await obj.save();
         res.status(200).send("OK");

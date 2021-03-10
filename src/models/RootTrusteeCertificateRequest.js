@@ -9,8 +9,11 @@ const rootTrusteeCertificateRequestSchema = new mongoose.Schema({
     subjectName: {
       type: String,
       required: true
-    }
-
+    },
+    iat_server: {
+      type: String,
+      required: true
+   } 
 });
 
 mongoose.model ('RootTrusteeCertificateRequest', rootTrusteeCertificateRequestSchema);

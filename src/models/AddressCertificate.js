@@ -28,7 +28,11 @@ const addressCertificateSchema = new mongoose.Schema({
       }
     },
     required: true 
-  }
+  },
+  iat_server: {
+    type: String,
+    required: true
+ } 
 
 });
 

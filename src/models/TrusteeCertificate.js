@@ -26,7 +26,11 @@ const trusteeCertificateSchema = new mongoose.Schema({
       }
     },
     required: true 
-  }
+  },
+  iat_server: {
+    type: String,
+    required: true
+ } 
 });
 
 mongoose.model ('TrusteeCertificate', trusteeCertificateSchema);
