@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const rootTrusteeCertificateSchema = new mongoose.Schema({
 
-      pbkey: {
+      signerId: {
         type: String,
         required: true
       },
