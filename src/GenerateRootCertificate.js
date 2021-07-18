@@ -21,8 +21,7 @@ const signTrusteeCertificateAndPack = async (subjectId, subjectName) => {
       const rootTrusteData = {
         certificate: certificateBody,
         sig: signedCertificate,
-        tid: getMyId(),
-        pbkey: userWallet.publicKey
+        pbkey: userWallet.signerId
       }
 
       return rootTrusteData;
