@@ -2,9 +2,12 @@ const { ethers } = require('ethers');
 
 const userWallet = new ethers.Wallet.createRandom();
 
-const getMyId = () => {
-    return "did:ethr:" + userWallet.address;
-}
+
+  const compressedPublicKey = ethers.utils.computePublicKey(
+    userWallet.privateKey,
+    true
+  );
+
 
 const signTrusteeCertificateAndPack = async (subjectId, subjectName) => {
 
@@ -21,7 +24,7 @@ const signTrusteeCertificateAndPack = async (subjectId, subjectName) => {
       const rootTrusteData = {
         certificate: certificateBody,
         sig: signedCertificate,
-        pbkey: userWallet.signerId
+        signerId: compressedPublicKey
       }
 
       return rootTrusteData;
