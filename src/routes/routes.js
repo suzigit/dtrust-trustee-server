@@ -151,5 +151,37 @@ router.get("/lastRootTrusteeCertificateRequest", requireAuth, async (req, res) =
     }
 });
 
+router.post('/createCertificateManagerFromLast', requireAuth, async (req, res) => {
+
+    console.log("createCertificateManagerFromLast");
+
+    try {
+        //get inforRootTrustee
+        const rootTrusteeCertificateRequest = await RootTrusteeCertificateRequest.find()
+            .sort({ "iat_server": -1 })
+            .limit(1)
+            .exec();
+        console.log(rootTrusteeCertificateRequest);
+
+        //generate a root certificate
+        const certificate = await signTrusteeCertificateAndPack(rootTrusteeCertificateRequest.subjectId,
+            rootTrusteeCertificateRequest.subjectName);
+        console.log("gerou certificado");
+        console.log(certificate);
+
+        //save the new certificate
+        certificate.iat_server = Date.now();
+
+        const obj = new RootTrusteeCertificate(certificate);
+        await obj.save();
+        res.status(200).send("OK");
+
+
+    } catch (err) {
+        console.log(err);
+        res.status(422).send("error createCertificateManagerFromLast: " + err);
+    }
+
+});
 
 module.exports = router;
