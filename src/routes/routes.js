@@ -164,8 +164,8 @@ router.post('/createCertificateManagerFromLast', requireAuth, async (req, res) =
         console.log(rootTrusteeCertificateRequest);
 
         //generate a root certificate
-        const certificate = await signTrusteeCertificateAndPack(rootTrusteeCertificateRequest.subjectId,
-            rootTrusteeCertificateRequest.subjectName);
+        const certificate = await signTrusteeCertificateAndPack(rootTrusteeCertificateRequest[0].subjectId,
+            rootTrusteeCertificateRequest[0].subjectName);
         console.log("gerou certificado");
         console.log(certificate);
 
